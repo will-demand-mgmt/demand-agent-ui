@@ -4,7 +4,16 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Demand Intelligence Agent</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+  <script>
+(function(){
+  var AUTH_KEY = 'da_auth';
+  if (sessionStorage.getItem(AUTH_KEY) !== 'true') {
+    var next = encodeURIComponent(window.location.pathname + window.location.search);
+    window.location.replace('/login?next=' + next);
+  }
+})();
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -165,9 +174,12 @@
       <div class="query-list" id="suggested-queries"></div>
     </div>
 
-    <div class="sidebar-footer">
+    <div class="sidebar-footer" style="display:flex;flex-direction:column;gap:8px;">
       <a href="https://demand-intelligence.fastwilll.workers.dev" target="_blank">
         <i class="ti ti-layout-dashboard" style="font-size:13px;"></i> Demand Intelligence
+      </a>
+      <a href="/login" onclick="sessionStorage.removeItem('da_auth')" style="color:#E05555 !important;">
+        <i class="ti ti-logout" style="font-size:13px;"></i> Sign out
       </a>
     </div>
   </div>
